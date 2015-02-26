@@ -5,34 +5,29 @@
     android:layout_height="match_parent"
     android:gravity="top|center"
     android:orientation="vertical"
-    android:padding="10dp"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/newItemEditText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/lbl_manualList"
-        android:textSize="@dimen/abc_text_size_title_material"
-        android:textStyle="bold" />
+        android:ems="10"
+        android:hint="@string/lbl_add_new_item"
+        android:lines="1" >
+
+        <requestFocus />
+    </EditText>
 
     <Button
-        android:id="@+id/bt_add"
+        android:id="@+id/bt_addAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lbl_add" />
 
     <Button
-        android:id="@+id/bt_randomSelect"
+        android:id="@+id/bt_addCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lbl_select_random" />
-
-    <ListView
-        android:id="@+id/itensListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" >
-
-    </ListView>
+        android:text="@string/lbl_cancel" />
 
 </LinearLayout>

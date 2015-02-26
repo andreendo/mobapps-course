@@ -18,5 +18,10 @@
     <string name="lbl_bt_generate">Generate random number</string>
     <string name="lbl_begin">begin</string>
     <string name="lbl_end">end</string>
+    <string name="lbl_add">Add</string>
+    <string name="title_activity_manual_list_add">ManualListAddActivity</string>
+    <string name="lbl_cancel">Cancel</string>
+    <string name="lbl_add_new_item">new item</string>
+    <string name="lbl_select_random">Select item randomly</string>
 
 </resources>

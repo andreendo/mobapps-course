@@ -43,6 +43,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.github.andreendo.mobappscourse.mylittlerandom.MainActivity" />
         </activity>
+        <activity
+            android:name=".ManualListAddActivity"
+            android:label="@string/title_activity_manual_list_add" >
+        </activity>
     </application>
 
 </manifest>
