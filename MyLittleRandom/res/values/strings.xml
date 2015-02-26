@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MyLittleRandom</string>
+    <string name="generate_from">Generate from:</string>
+    <string name="bt_interval">Interval</string>
+    <string name="bt_manualList">Manual List</string>
+    <string name="bt_textFile">Text File</string>
+    <string name="title_activity_interval">IntervalActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_manual_list">ManualListActivity</string>
+    <string name="title_activity_text_file">TextFileActivity</string>
+    <string name="lbl_interval">Interval</string>
+    <string name="lbl_textfile">Text File</string>
+    <string name="lbl_manualList">Manual List</string>
+    <string name="fromLabel">From:</string>
+    <string name="toLabel">To:</string>
+    <string name="lbl_bt_generate">Generate random number</string>
+    <string name="lbl_begin">begin</string>
+    <string name="lbl_end">end</string>
+
+</resources>
