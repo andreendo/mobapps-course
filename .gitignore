@@ -10,6 +10,7 @@ bin/
 gen/
 */bin/
 */gen/
+*/libs/
 # Gradle files
 .gradle/
 build/
