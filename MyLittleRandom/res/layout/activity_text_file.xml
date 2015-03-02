@@ -3,7 +3,7 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="top|center"
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
@@ -13,5 +13,23 @@
         android:text="@string/lbl_textfile" 
         android:textSize="@dimen/abc_text_size_title_material"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/addFilebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bt_addFile" />
+
+    <Button
+        android:id="@+id/addSelectRandomButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_select_random" />
+
+    <ListView
+        android:id="@+id/fileListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
 
 </LinearLayout>

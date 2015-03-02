@@ -60,7 +60,7 @@ public class ManualListActivity extends Activity {
 			
             dialogBuilder.setTitle(title);
             dialogBuilder.setMessage(msg);
-            dialogBuilder.setPositiveButton("OK", null);
+            dialogBuilder.setPositiveButton(R.string.lbl_ok, null);
             dialogBuilder.show();			
 		}
 	};	
