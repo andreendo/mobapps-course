@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/showItem" android:title="@string/lbl_show"></item>
+    <item android:id="@+id/deleteItem" android:title="@string/lbl_delete"></item>
+    <item android:id="@+id/toTopItem" android:title="@string/lbl_totop"></item>
+    <item android:id="@+id/toEndItem" android:title="@string/lbl_toend"></item>
+</menu>

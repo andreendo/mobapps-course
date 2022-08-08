@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TodoV2App</string>
+    <string name="lbl_show">Show details</string>
+    <string name="lbl_delete">Delete task</string>
+    <string name="lbl_totop">Move task to top</string>
+    <string name="lbl_toend">Move task to button</string>
+</resources>
