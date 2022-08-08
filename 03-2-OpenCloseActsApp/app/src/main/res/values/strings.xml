@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">OpenCloseActsApp</string>
+    <string name="exit">Exit</string>
+    <string name="open_one">Open OneActivity</string>
+    <string name="open_two">Open TwoActivity</string>
+    <string name="main_title">MainActivity</string>
+    <string name="one_title">OneActivity</string>
+    <string name="two_title">TwoActivity</string>
+    <string name="come_from_label">Come from:</string>
+    <string name="unknow_act">unknown activity</string>
+</resources>
