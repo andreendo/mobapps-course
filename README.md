@@ -40,4 +40,11 @@ Edited by Andre T. Endo
 - One2NineAppWithRoom
 - RoomApp1
 
+## 06-1 - Accessing REST APIs
 
+- CheckWeatherApp
+- Retrofit1App
+- Retrofit1AppExercicio
+- BoardService (server / servidor)
+- BoardOfMessagesApp
+- BoardOfMessagesAppV2

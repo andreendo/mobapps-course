@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CheckWeatherApp</string>
+    <string name="city_name">City Name</string>
+    <string name="get_weather">Get Weather</string>
+    <string name="city_label">City: %s</string>
+    <string name="city_temp">Temp: %.1f</string>
+    <string name="city_temp_min">Temp (min): %.1f</string>
+    <string name="city_temp_max">Temp (max): %.1f</string>
+    <string name="city_humidity">Humidity: %d %</string>
+</resources>

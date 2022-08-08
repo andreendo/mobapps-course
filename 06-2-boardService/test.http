@@ -1,0 +1,10 @@
+GET http://localhost:3000/board
+
+###
+
+POST http://localhost:3000/board
+Content-Type: application/json
+
+{
+    "name": "board 1"
+}
