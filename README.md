@@ -29,4 +29,8 @@ Edited by Andre T. Endo
 - SharedPreferencesClicksApp
 - One2NineApp
 
+## 05-1 - ViewModels
 
+- LiveData1
+- MyShoppingList
+- TodoV3App
