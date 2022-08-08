@@ -34,3 +34,10 @@ Edited by Andre T. Endo
 - LiveData1
 - MyShoppingList
 - TodoV3App
+
+## 04-2 - Android Room (local persistence - database)
+
+- One2NineAppWithRoom
+- RoomApp1
+
+
