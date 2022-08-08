@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Form2</string>
+    <string name="lbl_nome">Nome:</string>
+    <string name="lbl_sexo">Sexo:</string>
+    <string name="lbl_estado">Estado:</string>
+    <string name="lbl_cidade">Cidade:</string>
+    <string name="lbl_nome_inserir">inserir nome aqui</string>
+    <string name="lbl_masc">Masculino</string>
+    <string name="lbl_fem">Feminino</string>
+    <string name="lbl_salvar">Salvar</string>
+</resources>
