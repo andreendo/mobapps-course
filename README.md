@@ -24,4 +24,9 @@ Edited by Andre T. Endo
 - PopupMenuApp
 - TodoV2App
 
+## 04-1 - Shared Preferences (local persistence)
+
+- SharedPreferencesClicksApp
+- One2NineApp
+
 
