@@ -6,7 +6,12 @@ Edited by Andre T. Endo
 - Form1
 - ToastDialogApp
 
-## 03-2 - Activities (part 1)
+## 03-2 - Activities
 
 - ActivityLifeCycleApp
 - OpenCloseActsApp
+- ImcApp
+- Todo-v1
+
+
+

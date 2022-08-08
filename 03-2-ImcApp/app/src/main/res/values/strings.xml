@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ImcApp</string>
+    <string name="fill_form">Fill form</string>
+    <string name="confirm_form">Confirm form</string>
+    <string name="name">Name</string>
+    <string name="age">Age</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="calculate">Calculate</string>
+    <string name="confirm_title">Provided Data</string>
+    <string name="confirm_and_calculate">Confirm and calculate</string>
+    <string name="imc">IMC</string>
+</resources>
