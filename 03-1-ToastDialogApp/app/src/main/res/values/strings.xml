@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ToastDialogApp</string>
+    <string name="show_toast_1">Show Toast 1</string>
+    <string name="show_toast_2">Show Toast 2</string>
+    <string name="exit_with_dialog">Exit with dialog</string>
+    <string name="show_empty_dialog">Show empty dialog</string>
+    <string name="short_msg">A short message!</string>
+    <string name="long_msg">A long message......</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="exit_dialog_title">\???</string>
+    <string name="exit_dialog_msg">Are you sure?</string>
+    <string name="error_title">Error</string>
+    <string name="error2_dialog_msg">Some error message</string>
+</resources>
