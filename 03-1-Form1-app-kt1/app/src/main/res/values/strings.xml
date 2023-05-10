@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Form1</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="password">Password</string>
+    <string name="email">E-mail</string>
+    <string name="form_data_saved_msg">Form data saved!!</string>
+    <string name="fill_it">Fill it!</string>
+</resources>
