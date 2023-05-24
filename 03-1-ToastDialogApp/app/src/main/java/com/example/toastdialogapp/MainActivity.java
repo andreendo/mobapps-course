@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         binding.toast2Button.setOnClickListener(view -> {
             Toast toast = Toast.makeText(this,
                     R.string.long_msg, Toast.LENGTH_LONG);
+            // This method is not working for devices running API30 or higher
+            // Source: https://stackoverflow.com/questions/65004242/toast-setgravity-does-not-work-in-my-avd-nexus-6-api-30
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             toast.show();
         });
