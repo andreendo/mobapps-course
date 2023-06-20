@@ -8,9 +8,11 @@ import retrofit2.http.Query;
 
 public interface AnimeQuoteInterface {
 
-    @GET("api/random")
+//    @GET("api/random")
+    @GET("random")
     public Call<AnimeQuote> getRandomQuote();
 
-    @GET("api/quotes/character")
+//    @GET("api/quotes/character")
+    @GET("quotes/character")
     public Call<List<AnimeQuote>> getQuotesFor(@Query("name") String name);
 }

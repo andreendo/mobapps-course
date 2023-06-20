@@ -5,6 +5,7 @@ import retrofit2.http.GET;
 
 public interface AnimeQuoteInterface {
 
-    @GET("api/random")
+//    @GET("api/random")
+    @GET("random")
     public Call<AnimeQuote> getRandomQuote();
 }
