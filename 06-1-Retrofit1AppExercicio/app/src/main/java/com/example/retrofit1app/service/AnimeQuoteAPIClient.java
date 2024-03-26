@@ -11,7 +11,7 @@ public class AnimeQuoteAPIClient {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
 //                    .baseUrl("https://animechan.vercel.app/")
-                    .baseUrl("http://animechan.melosh.space/")
+                    .baseUrl("https://animechan.xyz/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
