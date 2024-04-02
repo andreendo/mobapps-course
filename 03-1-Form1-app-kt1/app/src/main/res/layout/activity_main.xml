@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="10"
+        android:hint="@string/last_name"
         android:inputType="textPersonName"
         android:minHeight="48dp" />
 
@@ -43,6 +44,7 @@
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="10"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:minHeight="48dp" />
 
