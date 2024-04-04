@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="click_me">Click Me!!!</string>
+    <string name="clicked_message">You clicked %d times!!</string>
+    <string name="hello_android">Hello Android!</string>
+    <string name="yeah">Yeah...</string>
+</resources>
