@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ToastDialogApp_kt2</string>
+    <string name="show_toast1">Show toast 1</string>
+    <string name="show_toast2">Show toast 2</string>
+    <string name="exit_with_dialog">Exit app with dialog</string>
+    <string name="show_empty_dialog">Show empty dialog</string>
+    <string name="short_toast_msg">This is a short toast...</string>
+    <string name="long_toast_msg">This is a looong toast...</string>
+</resources>
