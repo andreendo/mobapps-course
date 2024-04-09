@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TodoV1_kt2</string>
+    <string name="back_button">back button</string>
+    <string name="add_task">Add Task</string>
+</resources>
