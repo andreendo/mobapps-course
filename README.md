@@ -1,21 +1,23 @@
 # Mobile App Development Course
 Edited by Andre T. Endo
 
+All projects listed next use the view-based approach and Java. Projects marked with (*kt) have also a version using Jetpack Compose and Kotlin. 
+
 ## 03-1 - Basic elements of User Interface (UI) (elementos básicos de UI)
 
-- Form1
-- ToastDialogApp
+- Form1 (*kt)
+- ToastDialogApp (*kt)
 
 ## 03-2 - Activities
 
-- ActivityLifeCycleApp
-- OpenCloseActsApp
-- ImcApp
-- Todo-v1
+- ActivityLifeCycleApp (*kt)
+- OpenCloseActsApp (*kt)
+- ImcApp (*kt)
+- Todo-v1 (*kt)
 
 ## 03-3 - Basic elements of UI - part 2 (elementos básicos de UI)
 
-- PesquisaDeInteresseApp
+- PesquisaDeInteresseApp (*kt)
 - Form2
 
 ## 03-4 - Menus and Fragments
