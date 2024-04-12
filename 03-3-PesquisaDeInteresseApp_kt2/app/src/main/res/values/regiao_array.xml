@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="regiao_array">
+        <item>--</item>
+        <item>Centro Oeste</item>
+        <item>Nordeste</item>
+        <item>Norte</item>
+        <item>Sudeste</item>
+        <item>Sul</item>
+    </string-array>
+</resources>
