@@ -22,7 +22,7 @@ All projects listed next use the view-based approach and Java. Projects marked w
 
 ## 03-4 - Menus and Fragments
 
-- ActionBarApp
+- ActionBarApp (*kt)
 - PopupMenuApp
 - TodoV2App
 
