@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SharedPreferencesClicksApp</string>
+    <string name="click_here">Click Here!</string>
+    <string name="clicked_msg">The button has been clicked %d times!</string>
+</resources>

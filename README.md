@@ -26,9 +26,9 @@ All projects listed next use the view-based approach and Java. Projects marked w
 - PopupMenuApp
 - TodoV2App
 
-## 04-1 - Shared Preferences (local persistence)
+## 04-1 - Shared Preferences / DataStore (local persistence)
 
-- SharedPreferencesClicksApp
+- SharedPreferencesClicksApp (*kt)
 - One2NineApp
 
 ## 05-1 - ViewModels
