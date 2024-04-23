@@ -34,10 +34,15 @@ public class HomeFragment extends Fragment {
                 new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         TasksAdapter tasksAdapter = new TasksAdapter();
         binding.taskListRecyclerView.setAdapter(tasksAdapter);
-        tasksAdapter.setClickListener((view, position) -> showDialog(position));
+        tasksAdapter.setClickListener((view, position) -> mainViewModel.showDialog(position));
 
         // mainViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> tasksAdapter.submitList(tasks));
         mainViewModel.getTasks().observe(getViewLifecycleOwner(), tasksAdapter::submitList);
+        mainViewModel.getShowDialog().observe(getViewLifecycleOwner(), position -> {
+            if (position == -1)
+                return;
+            showDialog(position);
+        });
 
         return root;
     }
@@ -51,6 +56,7 @@ public class HomeFragment extends Fragment {
         builder.setPositiveButton("Yes", (dialog, which) -> mainViewModel.removeTask(position));
         builder.setNegativeButton("No", null);
         builder.create().show();
+        mainViewModel.dismissDialog();
     }
 
     @Override

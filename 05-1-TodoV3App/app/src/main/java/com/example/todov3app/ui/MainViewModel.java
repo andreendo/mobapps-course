@@ -12,6 +12,7 @@ import java.util.List;
 
 public class MainViewModel extends ViewModel {
     private MutableLiveData<List<Task>> tasks;
+    private MutableLiveData<Integer> showDialog = new MutableLiveData<>(-1);
 
     public LiveData<List<Task>> getTasks() {
         if (tasks == null) {
@@ -22,6 +23,10 @@ public class MainViewModel extends ViewModel {
             ));
         }
         return tasks;
+    }
+
+    public LiveData<Integer> getShowDialog() {
+        return showDialog;
     }
 
     public void addTask(String name, String description) {
@@ -39,5 +44,13 @@ public class MainViewModel extends ViewModel {
         List<Task> newList = new ArrayList<Task>(tasks.getValue());
         newList.remove(index);
         tasks.setValue(newList);
+    }
+
+    public void showDialog(int position) {
+        showDialog.setValue(position);
+    }
+
+    public void dismissDialog() {
+        showDialog.setValue(-1);
     }
 }
