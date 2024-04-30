@@ -39,7 +39,7 @@ All projects listed next use the view-based approach and Java. Projects marked w
 
 ## 04-2 - Android Room (local persistence - database)
 
-- One2NineAppWithRoom
+- One2NineAppWithRoom (*kt)
 - RoomApp1
 
 ## 06-1 - Accessing REST APIs

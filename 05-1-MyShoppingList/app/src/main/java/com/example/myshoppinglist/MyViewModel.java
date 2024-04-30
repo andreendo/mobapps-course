@@ -14,6 +14,11 @@ import java.util.Random;
 
 public class MyViewModel extends ViewModel {
     private MutableLiveData<List<String>> shoppingList;
+    private MutableLiveData<Boolean> showProgressBar = new MutableLiveData<>(true);
+
+    public MutableLiveData<Boolean> getShowProgressBar() {
+        return showProgressBar;
+    }
 
     public LiveData<List<String>> getShoppingList() {
         if (shoppingList == null) {
@@ -39,6 +44,7 @@ public class MyViewModel extends ViewModel {
 
             //notify that the live data changed
             shoppingList.setValue(listSample);
+            showProgressBar.setValue(false);
             // end - runnable block
         }, 5000);
     }

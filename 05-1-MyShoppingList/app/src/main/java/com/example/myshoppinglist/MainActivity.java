@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        binding.progressBar.setVisibility(View.VISIBLE);
+//        binding.progressBar.setVisibility(View.VISIBLE);
 
         MyViewModel myViewModel = new ViewModelProvider(this).get(MyViewModel.class);
 
@@ -43,7 +43,15 @@ public class MainActivity extends AppCompatActivity {
                         .show();
             });
             binding.recyclerView.setAdapter(myRecyclerViewAdapter);
-            binding.progressBar.setVisibility(View.GONE);
+//            binding.progressBar.setVisibility(View.GONE);
+        });
+
+        myViewModel.getShowProgressBar().observe(this, show -> {
+            if (show)
+                binding.progressBar.setVisibility(View.VISIBLE);
+            else
+                binding.progressBar.setVisibility(View.GONE);
+
         });
     }
 }
