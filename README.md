@@ -45,7 +45,7 @@ All projects listed next use the view-based approach and Java. Projects marked w
 ## 06-1 - Accessing REST APIs
 
 - CheckWeatherApp
-- Retrofit1App
+- Retrofit1App (*kt)
 - Retrofit1AppExercicio
 - BoardService (server / servidor)
 - BoardOfMessagesApp
