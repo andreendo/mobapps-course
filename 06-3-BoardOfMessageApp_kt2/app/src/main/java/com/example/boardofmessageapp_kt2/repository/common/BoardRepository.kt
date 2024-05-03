@@ -17,5 +17,11 @@ class BoardRepository(
 
     suspend fun getBoards(): List<Board> = client.getBoards()
 
+    suspend fun addBoard(board: Board) = client.addBoard(board)
+
+    suspend fun deleteBoard(iid: Long) = client.deleteBoard(iid)
+
+    suspend fun getMessages(iid: Long): List<Message> = client.getMessages(iid)
+
     suspend fun reset(): GeneralResponse = client.reset()
 }

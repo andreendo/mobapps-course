@@ -47,7 +47,7 @@ fun ListTask(
 fun ListTaskPreview() {
     TodoV1_kt2Theme {
         ListTask(
-            tasks = ((1..10).map { Task("Task " + it, "Task " + it) })
+            tasks = ((1..5).map { Task("Task " + it, "Task " + it) })
 //            tasks = listOf(
 //                Task("Task 1", "Task 1"),
 //                Task("Task 2", "Task 2"),

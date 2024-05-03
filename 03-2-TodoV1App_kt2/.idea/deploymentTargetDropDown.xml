@@ -2,7 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="app">
+      <entry key="App">
         <State>
           <targetSelectedWithDropDown>
             <Target>
@@ -15,7 +15,7 @@
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-04-08T19:23:09.938164284Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-05-02T12:31:18.991977590Z" />
         </State>
       </entry>
     </value>

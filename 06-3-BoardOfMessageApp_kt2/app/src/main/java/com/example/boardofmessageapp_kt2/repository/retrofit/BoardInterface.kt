@@ -15,7 +15,7 @@ interface BoardInterface {
     @GET("board")
     suspend fun getBoards() : List<Board>
 
-    @POST
+    @POST("board")
     suspend fun addBoard(@Body board: Board): Board
 
     @GET("board/{iid}")
