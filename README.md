@@ -48,5 +48,5 @@ All projects listed next use the view-based approach and Java. Projects marked w
 - Retrofit1App (*kt)
 - Retrofit1AppExercicio
 - BoardService (server / servidor)
-- BoardOfMessagesApp
+- BoardOfMessagesApp (*kt)
 - BoardOfMessagesAppV2
