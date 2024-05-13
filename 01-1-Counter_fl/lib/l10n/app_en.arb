@@ -1,0 +1,6 @@
+{
+  "@@locale": "en",
+  "title": "Hello World",
+  "welcomeMessage": "Welcome to my app!",
+  "clickHereToo": "Click Here Too!"
+}
