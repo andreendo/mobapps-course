@@ -1,0 +1,12 @@
+{
+  "appName": "ToDo V1",
+  "addNewTask": "Add New Task",
+  "add": "Add",
+  "yes": "Yes",
+  "no": "No",
+  "haveYouFinished": "Have you finished?",
+  "task": "Task: {name}\nDescription: {description}",
+  "taskName": "Task Name",
+  "taskDesc": "Task Description",
+  "errorEmptyText": "Enter some text."
+}
