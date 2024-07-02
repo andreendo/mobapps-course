@@ -11,3 +11,4 @@ data class Score(
     val time: Float,
     val whenPlayed: String
 )
+

@@ -5,7 +5,7 @@ import retrofit2.http.GET
 interface AnimeQuoteInterface {
 
     //    @GET("api/random")
-    @GET("random")
+    @GET("randomQuote")
     suspend fun getRandomQuote() : AnimeQuote
 
 }

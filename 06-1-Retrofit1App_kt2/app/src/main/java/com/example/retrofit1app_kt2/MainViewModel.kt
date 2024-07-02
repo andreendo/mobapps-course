@@ -23,7 +23,7 @@ class MainViewModel : ViewModel() {
                 val randomQuote = api.getRandomQuote()
                 quote = randomQuote.quote
             } catch (e: Exception) {
-                quote = "Error"
+                quote = "Error: "
             } finally {
                 loading = false
             }
