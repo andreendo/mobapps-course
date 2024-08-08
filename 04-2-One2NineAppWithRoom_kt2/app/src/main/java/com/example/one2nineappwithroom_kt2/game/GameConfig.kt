@@ -8,7 +8,7 @@ class GameConfig {
     init {
         configurations.add(getNumberNumber())
 //        configurations.add(getNumberRoman())
-        configurations.add(getNumberEnglish())
+//        configurations.add(getNumberEnglish())
         reset()
     }
 
