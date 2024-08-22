@@ -1,19 +1,20 @@
 # Mobile App Development Course
 Edited by Andre T. Endo
 
-All projects listed next use the view-based approach and Java. Projects marked with (*kt) have also a version using Jetpack Compose and Kotlin. 
+All projects listed next use the view-based approach and Java. Projects marked with (*kt) have also a version using Jetpack Compose and Kotlin, while the ones marked with (*fl) have a version using Flutter. 
 
 ## 03-1 - Basic elements of User Interface (UI) (elementos básicos de UI)
 
+- Counter (*kt) (*fl)
 - Form1 (*kt)
-- ToastDialogApp (*kt)
+- ToastDialogApp (*kt) (*fl)
 
 ## 03-2 - Activities
 
 - ActivityLifeCycleApp (*kt)
 - OpenCloseActsApp (*kt)
-- ImcApp (*kt)
-- Todo-v1 (*kt)
+- ImcApp (*kt) (*fl)
+- Todo-v1 (*kt) (*fl)
 
 ## 03-3 - Basic elements of UI - part 2 (elementos básicos de UI)
 
@@ -28,7 +29,7 @@ All projects listed next use the view-based approach and Java. Projects marked w
 
 ## 04-1 - Shared Preferences / DataStore (local persistence)
 
-- SharedPreferencesClicksApp (*kt)
+- SharedPreferencesClicksApp (*kt) (*fl)
 - One2NineApp
 
 ## 05-1 - ViewModels
@@ -39,14 +40,14 @@ All projects listed next use the view-based approach and Java. Projects marked w
 
 ## 04-2 - Android Room (local persistence - database)
 
-- One2NineAppWithRoom (*kt)
+- One2NineAppWithRoom (*kt) (*fl)
 - RoomApp1
 
 ## 06-1 - Accessing REST APIs
 
-- CheckWeatherApp
+- CheckWeatherApp (*kt) (*fl)
 - Retrofit1App (*kt)
 - Retrofit1AppExercicio
 - BoardService (server / servidor)
-- BoardOfMessagesApp (*kt)
+- BoardOfMessagesApp (*kt) (*fl)
 - BoardOfMessagesAppV2
