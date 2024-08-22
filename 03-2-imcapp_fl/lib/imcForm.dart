@@ -23,7 +23,7 @@ class _ImcFormState extends State<ImcForm> {
   final _weightController = TextEditingController();
 
   void _clearData() {
-    _nameController.text = "";
+    _nameController.clear();
     _ageController.text = "";
     _heightController.text = "";
     _weightController.text = "";
@@ -55,40 +55,40 @@ class _ImcFormState extends State<ImcForm> {
               children: <Widget>[
                 TextFormField(
                   controller: _nameController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Name",
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 TextFormField(
                   controller: _ageController,
                   keyboardType: TextInputType.number,
                   validator: validateInteger,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Age",
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 TextFormField(
                   controller: _heightController,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Height",
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 TextFormField(
                   controller: _weightController,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Weight",
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -96,7 +96,7 @@ class _ImcFormState extends State<ImcForm> {
                         onPressed: _clearData,
                         child: const Text("Clear Data")
                     ),
-                    SizedBox(width: 16.0),
+                    const SizedBox(width: 16.0),
                     ElevatedButton(
                         onPressed: _submitData,
                         child: const Text("Submit")

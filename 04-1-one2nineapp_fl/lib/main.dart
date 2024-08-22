@@ -7,8 +7,10 @@ import 'package:provider/provider.dart';
 import 'package:one2nineapp_fl/views/mainPage.dart';
 
 void main() async {
+  // Required for initialization tasks called before runApp()
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Initialization tasks
   final repository = ScoreRepository();
   await repository.initialize();
 

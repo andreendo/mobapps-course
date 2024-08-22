@@ -28,10 +28,10 @@ class ConfirmPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('IMC App - confirmation'),
+        title: const Text('IMC App - confirmation'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Table(
@@ -39,7 +39,7 @@ class ConfirmPage extends StatelessWidget {
               children: <TableRow>[
                 TableRow(
                   children: [
-                    TableCell(
+                    const TableCell(
                       child: TitleText(text: "Name:"),
                     ),
                     TableCell(
@@ -49,7 +49,7 @@ class ConfirmPage extends StatelessWidget {
                 ),
                 TableRow(
                   children: [
-                    TableCell(
+                    const TableCell(
                       child: TitleText(text: "Age:"),
                     ),
                     TableCell(
@@ -59,7 +59,7 @@ class ConfirmPage extends StatelessWidget {
                 ),
                 TableRow(
                   children: [
-                    TableCell(
+                    const TableCell(
                       child: TitleText(text: "Height:"),
                     ),
                     TableCell(
@@ -71,7 +71,7 @@ class ConfirmPage extends StatelessWidget {
                 ),
                 TableRow(
                   children: [
-                    TableCell(
+                    const TableCell(
                       child: TitleText(text: "Weight:"),
                     ),
                     TableCell(
@@ -126,9 +126,9 @@ class CommonText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       child: Text(
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 24,
         ),
         text,

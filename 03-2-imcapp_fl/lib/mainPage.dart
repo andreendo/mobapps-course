@@ -9,9 +9,9 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('IMC App'),
+        title: const Text('IMC App'),
       ),
-      body: ImcForm(),
+      body: const ImcForm(),
     );
   }
 }
