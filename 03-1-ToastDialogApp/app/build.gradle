@@ -5,9 +5,11 @@ plugins {
 android {
     compileSdk 32
 
+    namespace "com.example.toastdialogapp"
+
     defaultConfig {
         applicationId "com.example.toastdialogapp"
-        minSdk 21
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"

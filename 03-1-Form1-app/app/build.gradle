@@ -5,10 +5,12 @@ plugins {
 android {
     compileSdk 32
 
+    namespace "com.example.form1"
+
     defaultConfig {
         applicationId "com.example.form1"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -28,7 +30,6 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'

@@ -5,6 +5,8 @@ plugins {
 android {
     compileSdk 32
 
+    namespace "com.example.activitylifecycleapp"
+
     defaultConfig {
         applicationId "com.example.activitylifecycleapp"
         minSdk 21

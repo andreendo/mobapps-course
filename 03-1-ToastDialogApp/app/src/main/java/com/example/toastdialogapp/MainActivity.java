@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 dialog.cancel();
             });
 
-//            alertDialogBuilder.setOnCancelListener()
+            // Listener for the cancellation event of the dialog
+            // alertDialogBuilder.setOnCancelListener()
 
             alertDialogBuilder.create().show();
         });
