@@ -5,6 +5,8 @@ plugins {
 android {
     compileSdk 32
 
+    namespace "com.example.opencloseactsapp"
+
     defaultConfig {
         applicationId "com.example.opencloseactsapp"
         minSdk 21

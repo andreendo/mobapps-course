@@ -5,6 +5,8 @@ plugins {
 android {
     compileSdk 32
 
+    namespace "com.example.imcapp"
+
     defaultConfig {
         applicationId "com.example.imcapp"
         minSdk 21
