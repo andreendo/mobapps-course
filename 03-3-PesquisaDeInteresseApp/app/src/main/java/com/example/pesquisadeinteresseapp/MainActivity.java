@@ -3,10 +3,10 @@ package com.example.pesquisadeinteresseapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.pesquisadeinteresseapp.databinding.ActivityMainBinding;
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     msg.append(cbox.getText() + " ");
                 }
             }
+            Log.d("MainActivity", msg.toString());
             Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
         });
     }
@@ -68,19 +69,13 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener onRadioClickListener = v -> {
         //boolean checked = ((RadioButton) v).isChecked();
 
-        //if (checked) {
-            switch (v.getId()) {
-                case R.id.radioBt0:
-                    preencherCheckBoxList(dao.getByFaixa(1));
-                    break;
-                case R.id.radioBt1:
-                    preencherCheckBoxList(dao.getByFaixa(2));
-                    break;
-                case R.id.radioBt2:
-                    preencherCheckBoxList(dao.getByFaixa(3));
-                    break;
-            }
-        //}
+        if (v.getId() == R.id.radioBt0) {
+            preencherCheckBoxList(dao.getByFaixa(1));
+        } else if (v.getId() == R.id.radioBt1) {
+            preencherCheckBoxList(dao.getByFaixa(2));
+        } else if (v.getId() == R.id.radioBt2) {
+            preencherCheckBoxList(dao.getByFaixa(3));
+        }
     };
 
     private void preencherCheckBoxList(ArrayList<Preferencia> prefsByFaixa) {

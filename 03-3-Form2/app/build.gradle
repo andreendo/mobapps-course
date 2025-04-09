@@ -5,10 +5,12 @@ plugins {
 android {
     compileSdk 32
 
+    namespace "com.example.form2"
+
     defaultConfig {
         applicationId "com.example.form2"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
