@@ -5,6 +5,8 @@ plugins {
 android {
     compileSdk 32
 
+    namespace "com.example.todov1app"
+
     defaultConfig {
         applicationId "com.example.todov1app"
         minSdk 21

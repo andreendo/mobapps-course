@@ -5,6 +5,8 @@ plugins {
 android {
     compileSdk 32
 
+    namespace "com.example.actionbarapp"
+
     defaultConfig {
         applicationId "com.example.actionbarapp"
         minSdk 21

@@ -5,6 +5,8 @@ plugins {
 android {
     compileSdk 32
 
+    namespace "com.example.popupmenuapp"
+
     defaultConfig {
         applicationId "com.example.popupmenuapp"
         minSdk 21

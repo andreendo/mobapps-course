@@ -117,39 +117,36 @@ public class MainActivity extends AppCompatActivity {
         // chamado quando o usuario seleciona um item do contextual menu
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            switch(item.getItemId()) {
-                case R.id.showItem:
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    Task tTask = tasks.get(currentPosition);
-                    String tMsg = "Name: " + tTask.getName() + "\n" + "Description: " + tTask.getDescription();
-                    builder.setTitle("Task details");
-                    builder.setMessage(tMsg);
-                    builder.setPositiveButton("OK", null);
-                    builder.create().show();
-                    mode.finish();	//encerra o action mode
-                    return true;
-
-                case R.id.deleteItem:
-                    tasks.remove(currentPosition);
-                    taskRecyclerViewAdapter.notifyDataSetChanged();
-                    mode.finish();	//encerra o action mode
-                    return true;
-
-                case R.id.toTopItem:
-                    tTask = tasks.remove(currentPosition);
-                    tasks.add(0, tTask);
-                    taskRecyclerViewAdapter.notifyDataSetChanged();
-                    mode.finish();	//encerra o action mode
-                    return true;
-
-                case R.id.toEndItem:
-                    tTask = tasks.remove(currentPosition);
-                    tasks.add(tTask);
-                    taskRecyclerViewAdapter.notifyDataSetChanged();
-                    mode.finish();	//encerra o action mode
-                    return true;
+            if(item.getItemId() == R.id.showItem) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                Task tTask = tasks.get(currentPosition);
+                String tMsg = "Name: " + tTask.getName() + "\n" + "Description: " + tTask.getDescription();
+                builder.setTitle("Task details");
+                builder.setMessage(tMsg);
+                builder.setPositiveButton("OK", null);
+                builder.create().show();
+                mode.finish();    //encerra o action mode
+                return true;
+            } else if (item.getItemId() == R.id.deleteItem) {
+                tasks.remove(currentPosition);
+                taskRecyclerViewAdapter.notifyDataSetChanged();
+                mode.finish();    //encerra o action mode
+                return true;
+            } else if (item.getItemId() == R.id.toTopItem) {
+                Task tTask = tasks.remove(currentPosition);
+                tasks.add(0, tTask); // add it to the beginning of the list
+                taskRecyclerViewAdapter.notifyDataSetChanged();
+                mode.finish();    //encerra o action mode
+                return true;
+            } else if (item.getItemId() == R.id.toEndItem) {
+                Task tTask = tasks.remove(currentPosition);
+                tasks.add(tTask);
+                taskRecyclerViewAdapter.notifyDataSetChanged();
+                mode.finish();	//encerra o action mode
+                return true;
+            } else {
+                return false;
             }
-            return false;
         }
 
         //chamado to vez que o action mode eh apresentado
