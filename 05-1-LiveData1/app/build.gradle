@@ -5,6 +5,8 @@ plugins {
 android {
     compileSdk 32
 
+    namespace "com.example.livedata1"
+
     defaultConfig {
         applicationId "com.example.livedata1"
         minSdk 21

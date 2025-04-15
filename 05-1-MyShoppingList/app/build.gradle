@@ -5,6 +5,8 @@ plugins {
 android {
     compileSdk 32
 
+    namespace "com.example.myshoppinglist"
+
     defaultConfig {
         applicationId "com.example.myshoppinglist"
         minSdk 21
