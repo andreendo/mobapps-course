@@ -13,8 +13,8 @@ import com.example.toastdialogapp_kt2.ui.theme.ToastDialogApp_kt2Theme
 
 @Composable
 fun NormalAlertDialog(
-    onDismissRequest: () -> Unit,
-    onConfirmation: () -> Unit,
+    onDismissRequest: () -> Unit = {},
+    onConfirmation: () -> Unit = {},
     dialogTitle: String,
     dialogText: String,
     icon: ImageVector,
@@ -58,8 +58,6 @@ fun NormalAlertDialog(
 fun NormalAlertDialogPreview() {
     ToastDialogApp_kt2Theme {
         NormalAlertDialog(
-            onDismissRequest = { /*TODO*/ },
-            onConfirmation = { /*TODO*/ },
             dialogTitle = "Alert dialog example",
             dialogText = "This is an example of an alert dialog with buttons.",
             icon = Icons.Default.Info

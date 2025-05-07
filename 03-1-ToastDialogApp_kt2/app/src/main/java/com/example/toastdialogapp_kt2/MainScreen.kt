@@ -3,13 +3,14 @@ package com.example.toastdialogapp_kt2
 import android.app.Activity
 import android.view.Gravity
 import android.widget.Toast
-import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -21,10 +22,10 @@ import com.example.toastdialogapp_kt2.ui.theme.ToastDialogApp_kt2Theme
 @Composable
 fun MainScreen() {
     val context = LocalContext.current
-    val activity = (context as? Activity)
+    val activity = (context as? Activity) // try casting context to Activity, returns null if failed
 
-    val openMinimalDialog = remember { mutableStateOf(false) }
-    val openNormalDialog = remember { mutableStateOf(false) }
+    var openMinimalDialog by remember { mutableStateOf(false) }
+    var openNormalDialog by remember { mutableStateOf(false) }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Button(onClick = {
@@ -43,28 +44,29 @@ fun MainScreen() {
             Text(text = stringResource(id = R.string.show_toast2))
         }
         Button(onClick = {
-            openMinimalDialog.value = !openMinimalDialog.value
+            openMinimalDialog = !openMinimalDialog
         }) {
             Text(text = stringResource(id = R.string.show_empty_dialog))
         }
         Button(onClick = {
-            openNormalDialog.value = !openNormalDialog.value
+            openNormalDialog = !openNormalDialog
         }) {
             Text(text = stringResource(id = R.string.exit_with_dialog))
         }
     }
 
+    // Pattern matching to decide about the dialogs
     when {
-        openMinimalDialog.value -> {
+        openMinimalDialog -> {
             MinimalDialog(stringResource(id = R.string.show_empty_dialog), onDismissRequest = {
-                openMinimalDialog.value = false
+                openMinimalDialog = false
             })
         }
 
-        openNormalDialog.value -> {
+        openNormalDialog -> {
             NormalAlertDialog(
                 onDismissRequest = {
-                    openNormalDialog.value = false
+                    openNormalDialog = false
                 },
                 onConfirmation = {
                     activity?.finish()
