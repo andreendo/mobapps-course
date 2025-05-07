@@ -1,5 +1,7 @@
 # Jetpack Compose - criando uma tela de login
 
+Veja a solução final no projeto `03-1-login_kt2`.
+
 - Adicionar container para itens em uma coluna 
 
 ```kotlin
