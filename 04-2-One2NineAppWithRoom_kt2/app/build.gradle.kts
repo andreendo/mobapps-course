@@ -1,12 +1,13 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.kotlin.compose)
     id("kotlin-kapt")
 }
 
 android {
     namespace = "com.example.one2nineappwithroom_kt2"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.one2nineappwithroom_kt2"
@@ -65,15 +66,15 @@ dependencies {
 
     // Room dependencies
     // it needs kapt plugin -> id("kotlin-kapt")
-    val room_version = "2.6.1"
+    val room_version = "2.7.1"
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
 
     testImplementation(libs.junit)
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
     testImplementation("androidx.room:room-testing:$room_version")
-    androidTestImplementation("app.cash.turbine:turbine:0.9.0")
+    androidTestImplementation("app.cash.turbine:turbine:1.2.0")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
