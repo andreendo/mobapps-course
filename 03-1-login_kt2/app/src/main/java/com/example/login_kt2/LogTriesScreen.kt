@@ -1,13 +1,12 @@
 package com.example.login_kt2
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -19,22 +18,19 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.login_kt2.ui.theme.Login_kt2Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(
-    modifier: Modifier = Modifier,
-    viewModel: MainViewModel = viewModel(factory = AppViewModelProvider.Factory),
-    navigateUp : () -> Unit = {}
+fun LogTriesScreen(
+    navigateUp : () -> Unit = {},
+    viewModel: LogTriesViewModel = viewModel(factory = AppViewModelProvider.Factory),
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("App Main") },
+                title = { Text("Log Tries Screen") },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer
                 ),
@@ -51,27 +47,17 @@ fun MainScreen(
         modifier = Modifier.fillMaxSize()
     ) { innerPadding ->
         Column(
-            modifier = modifier.fillMaxSize().padding(10.dp),
+            modifier = Modifier
+                .padding(innerPadding) // Apply the innerPadding to the Column (avoid topbar on top of items)
+                .padding(10.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
         ) {
-            Text(
-                "Main Page",
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
-            Spacer(modifier = Modifier.padding(10.dp))
-            Button(onClick = {}) {
-                Text("Logout")
+            Text("Login tries so far: ${viewModel.loginTries.size}")
+            LazyColumn {
+                itemsIndexed(viewModel.loginTries) { index, item ->
+                    LoginTryCard(item.toString())
+                }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MainPreview() {
-    Login_kt2Theme {
-        MainScreen()
     }
 }

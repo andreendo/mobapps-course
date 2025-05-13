@@ -28,8 +28,9 @@ import com.example.login_kt2.ui.theme.Login_kt2Theme
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
-    viewModel: MainViewModel = viewModel(),
-    onSuccessfulLogin : () -> Unit = {}
+    viewModel: MainViewModel = viewModel(factory = AppViewModelProvider.Factory),
+    onSuccessfulLogin : () -> Unit = {},
+    onLogTriesButtonClick : () -> Unit = {}
 ) {
     Scaffold(
         topBar = {
@@ -98,6 +99,10 @@ fun LoginScreen(
                 Button(onClick = viewModel::clearLogin) {
                     Text("Clear")
                 }
+            }
+            Spacer(modifier = Modifier.padding(10.dp))
+            Button(onClick = onLogTriesButtonClick) {
+                Text("View log of login tries")
             }
         }
 

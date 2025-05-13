@@ -6,10 +6,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.login_kt2.repository.LoginTryRepository
 import com.example.login_kt2.repository.UserRepository
+import com.example.login_kt2.repository.room.LoginTry
 import kotlinx.coroutines.launch
+import java.util.Date
 
-class MainViewModel : ViewModel() {
+class MainViewModel(val loginTryRepository: LoginTryRepository) : ViewModel() {
 
     var username by mutableStateOf("")
     var usernameError by mutableStateOf(false)
@@ -41,11 +44,18 @@ class MainViewModel : ViewModel() {
 
         viewModelScope.launch {
             isLoading = true
+            var loginTry = LoginTry(
+                username = username,
+                passwordLength = password.length,
+                whenTried = Date().toString(),
+                wasSuccessful = false
+            )
             val status = userRepository.login(username, password)
             isLoading = false
             Log.i("MainViewModel", "name: $username, password: $password, status: $status")
             when(status) {
                 "success" -> {
+                    loginTry = loginTry.copy(wasSuccessful = true)
                     Log.i("MainViewModel", "moving to main screen")
                     isLoginSuccessful = true
                 }
@@ -62,6 +72,8 @@ class MainViewModel : ViewModel() {
                     usernameErrorMessage = "Error: $status"
                 }
             }
+            Log.i("MainViewModel", "insert login try: $loginTry")
+            loginTryRepository.insert(loginTry)
         }
     }
 

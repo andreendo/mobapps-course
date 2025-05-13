@@ -28,13 +28,18 @@ fun App(
             startDestination = startingRoute
         ) {
             composable("login") {
-                LoginScreen(onSuccessfulLogin = {
-                    navController.navigate("main") {
-                        popUpTo(navController.graph.startDestinationId) {
-                            inclusive = true
+                LoginScreen(
+                    onSuccessfulLogin = {
+                        navController.navigate("main") {
+                            popUpTo(navController.graph.startDestinationId) {
+                                inclusive = true
+                            }
                         }
+                    },
+                    onLogTriesButtonClick = {
+                        navController.navigate("logTries")
                     }
-                })
+                )
             }
             composable("main") {
                 MainScreen(
@@ -42,6 +47,13 @@ fun App(
                         scope.launch {
                             activity?.finish()
                         }
+                    }
+                )
+            }
+            composable("logTries") {
+                LogTriesScreen(
+                    navigateUp = {
+                        navController.popBackStack()
                     }
                 )
             }
