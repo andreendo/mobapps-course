@@ -30,7 +30,6 @@ fun App() {
             Text(text = "New Quote")
         }
         if (viewModel.loading)
-//            Text(text = "loading...")
             LinearProgressIndicator(
                 modifier = Modifier
                     .fillMaxWidth()

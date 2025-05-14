@@ -17,8 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.one2nineappwithroom_kt2.game.Number
+import com.example.one2nineappwithroom_kt2.ui.theme.One2NineAppWithRoom_kt2Theme
 
 @Composable
 fun GameScreen(
@@ -132,5 +134,20 @@ fun GameButton(
             fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.headlineSmall
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GameScreenPreview(
+    modifier: Modifier = Modifier.fillMaxSize()
+) {
+    var numbers = (1..9).map { Number(it, it.toString()) }
+    var markers = (1..9).map { false }.toMutableList()
+
+    One2NineAppWithRoom_kt2Theme {
+        markers[6] = true
+        markers[1] = true
+        GameScreen(numbers, markers)
     }
 }

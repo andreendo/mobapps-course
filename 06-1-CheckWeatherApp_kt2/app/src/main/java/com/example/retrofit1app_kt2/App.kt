@@ -45,7 +45,6 @@ fun App() {
             Text(text = "Retrieve Weather")
         }
         if (viewModel.loading)
-//            Text(text = "loading...")
             LinearProgressIndicator(
                 modifier = Modifier
                     .fillMaxWidth()

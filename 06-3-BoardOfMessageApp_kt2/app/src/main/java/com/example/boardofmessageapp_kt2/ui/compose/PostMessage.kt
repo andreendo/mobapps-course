@@ -59,7 +59,8 @@ fun PostMessage(
             onValueChange = { text = it },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             singleLine = false,
-            maxLines = 3
+            maxLines = 5,
+            minLines = 5
         )
         Button(onClick = { mainViewModel.postMessage(boardId, from, to, text) }) {
             Text(text = "Post Message")

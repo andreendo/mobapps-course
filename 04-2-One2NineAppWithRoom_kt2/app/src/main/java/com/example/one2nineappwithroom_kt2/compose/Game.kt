@@ -1,6 +1,6 @@
 package com.example.one2nineappwithroom_kt2.compose
 
-import android.util.Log
+
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
