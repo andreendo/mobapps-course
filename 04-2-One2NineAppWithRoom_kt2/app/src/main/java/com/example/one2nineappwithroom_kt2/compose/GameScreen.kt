@@ -146,8 +146,8 @@ fun GameScreenPreview(
     var markers = (1..9).map { false }.toMutableList()
 
     One2NineAppWithRoom_kt2Theme {
-        markers[6] = true
-        markers[1] = true
+        markers[6] = false
+        markers[1] = false
         GameScreen(numbers, markers)
     }
 }
