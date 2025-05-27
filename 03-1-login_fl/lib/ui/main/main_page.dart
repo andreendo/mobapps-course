@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_fl/l10n/app_localizations.dart';
 
 class MainPage extends StatelessWidget {
 
@@ -7,16 +8,16 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Main Page"),
+        title: Text(AppLocalizations.of(context)!.main_page),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Some text here'),
+            Text(AppLocalizations.of(context)!.some_text_here),
             FilledButton(
                 onPressed: () {}, 
-                child: Text('Logout'))
+                child: Text(AppLocalizations.of(context)!.logout))
           ],
         ),
       ),

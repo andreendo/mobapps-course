@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_fl/app.dart';
-import 'package:login_fl/main_view_model.dart';
+import 'package:login_fl/ui/app.dart';
+import 'package:login_fl/viewmodels/main_view_model.dart';
 import 'package:login_fl/repository/user_repository.dart';
 import 'package:provider/provider.dart';
 

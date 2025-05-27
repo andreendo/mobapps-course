@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_fl/repository/user_repository.dart';
+import 'package:login_fl/ui/login/form_error.dart';
 
 class MainViewModel extends ChangeNotifier {
 
@@ -8,15 +9,17 @@ class MainViewModel extends ChangeNotifier {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  String? _usernameError;
-  String? _passwordError;
+  FormError _usernameError = FormError.none;
+  FormError _passwordError = FormError.none;
+  String? _customError;
 
   bool _isLoading = false;
 
   MainViewModel(this.userRepository);
 
-  String? get usernameError => _usernameError;
-  String? get passwordError => _passwordError;
+  FormError get usernameError => _usernameError;
+  FormError get passwordError => _passwordError;
+  String? get customError => _customError;
   bool get isLoading => _isLoading;
 
   Future<void> performLogin(void Function() onSuccess) async {
@@ -24,17 +27,18 @@ class MainViewModel extends ChangeNotifier {
     print("Username: ${usernameController.text}, password: ${passwordController
         .text}");
 
-    _usernameError = null;
-    _passwordError = null;
+    _usernameError = FormError.none;
+    _passwordError = FormError.none;
+    _customError = null;
 
     if (usernameController.text == "") {
-      _usernameError = "empty";
+      _usernameError = FormError.emptyField;
       notifyListeners();
       return;
     }
 
     if (passwordController.text == "") {
-      _passwordError = "empty";
+      _passwordError = FormError.emptyField;
       notifyListeners();
       return;
     }
@@ -46,11 +50,12 @@ class MainViewModel extends ChangeNotifier {
         usernameController.text, passwordController.text);
 
     if (status == "wrong_username") {
-      _usernameError = "wrong user name";
+      _usernameError = FormError.wrongUsername;
     } else if (status == "wrong_password") {
-      _passwordError = "wrong password";
+      _passwordError = FormError.wrongPassword;
     } else {
-      _usernameError = "Error: $status";
+      _usernameError = FormError.custom;
+      _customError = "Error: $status";
     }
     _isLoading = false;
     notifyListeners();
@@ -65,8 +70,9 @@ class MainViewModel extends ChangeNotifier {
     print("Clear button clicked");
     usernameController.clear();
     passwordController.clear();
-    _usernameError = null;
-    _passwordError = null;
+    _usernameError = FormError.none;
+    _passwordError = FormError.none;
+    _customError = null;
     notifyListeners();
   }
 }

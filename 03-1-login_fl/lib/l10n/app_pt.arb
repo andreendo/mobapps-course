@@ -1,0 +1,14 @@
+{
+  "login_page": "Página de Login",
+  "username": "Usuário",
+  "password": "Senha",
+  "login": "Logar",
+  "clear": "Limpar",
+  "empty": "Vazio",
+  "wrong_username": "Usuário incorreto",
+  "wrong_password": "Senha incorreta",
+  "main_page": "Página Principal",
+  "logout": "Logout",
+  "some_text_here": "Algum texto aqui!",
+  "loading" : "Carregando..."
+}

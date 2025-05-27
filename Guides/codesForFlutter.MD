@@ -454,7 +454,7 @@ class MainPage extends StatelessWidget {
 ```
 
 
-### Refatorar para conectar com uma web API (TODO)
+### Refatorar para conectar com uma web API
 
 - No projeto `06-2-boardService` execute os comandos a seguir; precisa do Nodejs instalado.
 
@@ -582,9 +582,307 @@ void main() {
 }
 ```
 
-### Adicionar internacionalização (TODO)
+### Adicionar internacionalização
 
-- 
+- Executar os comandos a seguir para adicionar as bibliotecas: `dart pub add flutter_localizations --sdk=flutter`, ` dart pub add intl:any`.
+
+- Alterar o `pubspec.yaml` e criar o arquivo `l10n.yaml`: 
+
+```yaml
+# pubspec.yaml
+flutter:
+  uses-material-design: true
+  generate: true # esta linha
+
+
+# l10n.yaml
+arb-dir: lib/l10n
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+```
+
+- Na pasta `lib/l10n`, adicionar os arquivos:
+
+```json
+// app_en.arb
+{
+  "login_page": "Login Page",
+  "username": "Username",
+  "password": "Password",
+  "login": "Login",
+  "clear": "Clear",
+  "empty": "Empty",
+  "wrong_username": "Wrong user name",
+  "wrong_password": "Wrong password",
+  "main_page": "Main Page",
+  "logout": "Logout",
+  "some_text_here": "Some text here!",
+  "loading" : "Loading..."
+}
+
+// app_pt.arb
+{
+  "login_page": "Página de Login",
+  "username": "Usuário",
+  "password": "Senha",
+  "login": "Logar",
+  "clear": "Limpar",
+  "empty": "Vazio",
+  "wrong_username": "Usuário incorreto",
+  "wrong_password": "Senha incorreta",
+  "main_page": "Página Principal",
+  "logout": "Logout",
+  "some_text_here": "Algum texto aqui!",
+  "loading" : "Carregando..."
+}
+```
+
+- Refatorar a classe `App` para adicionar as configurações de localização:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:login_fl/ui/login/login_page.dart';
+
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:login_fl/l10n/app_localizations.dart';
+
+class App extends StatelessWidget {
+  const App({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Login',
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: [
+        Locale('en'),
+        Locale('pt')
+      ],
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
+      home: const LoginPage(),
+    );
+  }
+}
+```
+
+- Refatorar todas as classes View. As maiores modificações em `LoginPage` e `MainViewModel` são mostradas a seguir:
+
+```dart
+// form_error.dart
+enum FormError {
+  none,
+  emptyField,
+  wrongUsername,
+  wrongPassword,
+  custom
+}
+
+// main_view_model.dart
+import 'package:flutter/material.dart';
+import 'package:login_fl/repository/user_repository.dart';
+import 'package:login_fl/ui/login/form_error.dart';
+
+class MainViewModel extends ChangeNotifier {
+
+  final UserRepository userRepository;
+
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  FormError _usernameError = FormError.none;
+  FormError _passwordError = FormError.none;
+  String? _customError;
+
+  bool _isLoading = false;
+
+  MainViewModel(this.userRepository);
+
+  FormError get usernameError => _usernameError;
+  FormError get passwordError => _passwordError;
+  String? get customError => _customError;
+  bool get isLoading => _isLoading;
+
+  Future<void> performLogin(void Function() onSuccess) async {
+    print("Login button clicked");
+    print("Username: ${usernameController.text}, password: ${passwordController
+        .text}");
+
+    _usernameError = FormError.none;
+    _passwordError = FormError.none;
+    _customError = null;
+
+    if (usernameController.text == "") {
+      _usernameError = FormError.emptyField;
+      notifyListeners();
+      return;
+    }
+
+    if (passwordController.text == "") {
+      _passwordError = FormError.emptyField;
+      notifyListeners();
+      return;
+    }
+
+    _isLoading = true;
+    notifyListeners();
+
+    var status = await userRepository.login(
+        usernameController.text, passwordController.text);
+
+    if (status == "wrong_username") {
+      _usernameError = FormError.wrongUsername;
+    } else if (status == "wrong_password") {
+      _passwordError = FormError.wrongPassword;
+    } else {
+      _usernameError = FormError.custom;
+      _customError = "Error: $status";
+    }
+    _isLoading = false;
+    notifyListeners();
+
+    if (status == "success") {
+      print("MainViewModel: moving to main screen");
+      onSuccess();
+    }
+  }
+
+  void clearLogin() {
+    print("Clear button clicked");
+    usernameController.clear();
+    passwordController.clear();
+    _usernameError = FormError.none;
+    _passwordError = FormError.none;
+    _customError = null;
+    notifyListeners();
+  }
+}
+
+// login_page.dart
+import 'package:flutter/material.dart';
+import 'package:login_fl/l10n/app_localizations.dart';
+import 'package:login_fl/ui/loading_dialog.dart';
+import 'package:login_fl/ui/login/form_error.dart';
+import 'package:login_fl/ui/main/main_page.dart';
+import 'package:login_fl/viewmodels/main_view_model.dart';
+import 'package:provider/provider.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    MainViewModel viewModel = Provider.of<MainViewModel>(context, listen: false);
+    viewModel.addListener(() {
+      if (viewModel.isLoading) {
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) => LoadingDialog()
+        );
+      } else {
+        if (Navigator.of(context).canPop()) {
+          Navigator.of(context).pop();
+        }
+      }
+    });
+  }
+
+  void onLoginSuccess() {
+    // use pushReplacement para remover o atual
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => MainPage()
+      )
+    );
+  }
+
+  String? _getErrorMessage(FormError error, String? custom) {
+    final localizations = AppLocalizations.of(context)!;
+    switch(error) {
+      case FormError.emptyField:
+        return localizations.empty;
+      case FormError.wrongUsername:
+        return localizations.wrong_username;
+      case FormError.wrongPassword:
+        return localizations.wrong_password;
+      case FormError.custom:
+        return custom ?? "";
+      case FormError.none:
+        return null;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final viewModel = Provider.of<MainViewModel>(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(AppLocalizations.of(context)!.login_page),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextFormField(
+              controller: viewModel.usernameController,
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.username,
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.person),
+                errorText: _getErrorMessage(viewModel.usernameError, viewModel.customError)
+              ),
+            ),
+            SizedBox(height: 10),
+            TextFormField(
+              controller: viewModel.passwordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.password,
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.lock),
+                errorText: _getErrorMessage(viewModel.passwordError, viewModel.customError)
+              ),
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FilledButton(
+                  onPressed: () => viewModel.performLogin(onLoginSuccess),
+                  child: Text(AppLocalizations.of(context)!.login),
+                ),
+                SizedBox(width: 20),
+                FilledButton(
+                  onPressed: () => viewModel.clearLogin(),
+                  child: Text(AppLocalizations.of(context)!.clear),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+```
 
 ### Salvar localmente todas as tentativas de login, com sucesso ou não (TODO)
 

@@ -1,0 +1,14 @@
+{
+  "login_page": "Login Page",
+  "username": "Username",
+  "password": "Password",
+  "login": "Login",
+  "clear": "Clear",
+  "empty": "Empty",
+  "wrong_username": "Wrong user name",
+  "wrong_password": "Wrong password",
+  "main_page": "Main Page",
+  "logout": "Logout",
+  "some_text_here": "Some text here!",
+  "loading" : "Loading..."
+}
