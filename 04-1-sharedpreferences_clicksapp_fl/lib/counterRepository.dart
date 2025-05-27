@@ -5,7 +5,7 @@ class CounterRepository {
   int _counter = 0;
 
   Future<int> getInitialValue() async {
-    // In AS, open "device explorer"
+    // In Android Studio, open "device explorer"
     // Navigate to: data/data/com.example.share.../shared_prefs/<pref_file>.xml
     final prefs = await SharedPreferences.getInstance();
     _counter = prefs.getInt("counter") ?? 0;

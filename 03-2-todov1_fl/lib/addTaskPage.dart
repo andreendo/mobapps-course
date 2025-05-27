@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todov1_fl/taskViewModel.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'l10n/app_localizations.dart';
+
 import 'package:todov1_fl/validators.dart';
 
 class AddTaskPage extends StatefulWidget {

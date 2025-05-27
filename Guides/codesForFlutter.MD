@@ -582,6 +582,10 @@ void main() {
 }
 ```
 
+### Adicionar internacionalização (TODO)
+
+- 
+
 ### Salvar localmente todas as tentativas de login, com sucesso ou não (TODO)
 
 - No build.gradle.kts, adicionar as seguir mudanças para usar o Android Room:

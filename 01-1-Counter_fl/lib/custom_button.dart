@@ -14,7 +14,7 @@ class CustomButton extends StatelessWidget {
   final String label;
   final bool hasCheck;
   final bool marked;
-  final VoidCallback onPressed;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {

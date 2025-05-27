@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter3/custom_button.dart';
 import 'package:flutter3/my_logo.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'l10n/app_localizations.dart';
 
 /**
  * For a stateful widget, you override the createState method.

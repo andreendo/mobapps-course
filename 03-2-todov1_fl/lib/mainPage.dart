@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todov1_fl/addTaskPage.dart';
 import 'package:todov1_fl/taskViewModel.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'l10n/app_localizations.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
