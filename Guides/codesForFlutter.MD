@@ -1,6 +1,6 @@
 # Flutter - criando uma tela de login
 
-Veja a solução final no projeto `?`.
+Veja a solução final no projeto `03-1-login_fl`.
 
 - Separar em arquivos App, e MyHomePage (renomeando para LoginPage). Modifique para incluir um button e testar um counter.
 
