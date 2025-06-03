@@ -10,5 +10,8 @@
   "main_page": "Página Principal",
   "logout": "Logout",
   "some_text_here": "Algum texto aqui!",
-  "loading" : "Carregando..."
+  "loading" : "Carregando...",
+  "view_log_of_login_tries": "Ver o registro de tentativas de login",
+  "login_tries_page": "Página de tentativas de Login",
+  "login_tries_so_far": "Tentativas até o momento:"
 }

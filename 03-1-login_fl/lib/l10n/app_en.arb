@@ -10,5 +10,8 @@
   "main_page": "Main Page",
   "logout": "Logout",
   "some_text_here": "Some text here!",
-  "loading" : "Loading..."
+  "loading" : "Loading...",
+  "view_log_of_login_tries": "View the log of login tries",
+  "login_tries_page": "Login Tries Page",
+  "login_tries_so_far": "Login tries so far:"
 }

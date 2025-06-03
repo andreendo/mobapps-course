@@ -3,6 +3,7 @@ import 'package:login_fl/l10n/app_localizations.dart';
 import 'package:login_fl/ui/loading_dialog.dart';
 import 'package:login_fl/ui/login/form_error.dart';
 import 'package:login_fl/ui/main/main_page.dart';
+import 'package:login_fl/ui/tries/login_tries_page.dart';
 import 'package:login_fl/viewmodels/main_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -41,6 +42,12 @@ class _LoginPageState extends State<LoginPage> {
       MaterialPageRoute(
         builder: (context) => MainPage()
       )
+    );
+  }
+
+  void onClickInLoginTries() {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => LoginTriesPage())
     );
   }
 
@@ -108,6 +115,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
+            SizedBox(height: 50),
+            FilledButton(
+              onPressed: onClickInLoginTries,
+              child: Text(AppLocalizations.of(context)!.view_log_of_login_tries))
           ],
         ),
       ),

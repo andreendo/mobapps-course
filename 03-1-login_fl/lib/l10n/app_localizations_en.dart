@@ -43,4 +43,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loading => 'Loading...';
+
+  @override
+  String get view_log_of_login_tries => 'View the log of login tries';
+
+  @override
+  String get login_tries_page => 'Login Tries Page';
+
+  @override
+  String get login_tries_so_far => 'Login tries so far:';
 }

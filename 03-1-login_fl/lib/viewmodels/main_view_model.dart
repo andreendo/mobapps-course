@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:login_fl/repository/floor/login_try.dart';
+import 'package:login_fl/repository/login_try_repository.dart';
 import 'package:login_fl/repository/user_repository.dart';
 import 'package:login_fl/ui/login/form_error.dart';
 
 class MainViewModel extends ChangeNotifier {
 
   final UserRepository userRepository;
+  final LoginTryRepository loginTryRepository;
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -15,7 +18,7 @@ class MainViewModel extends ChangeNotifier {
 
   bool _isLoading = false;
 
-  MainViewModel(this.userRepository);
+  MainViewModel(this.userRepository, this.loginTryRepository);
 
   FormError get usernameError => _usernameError;
   FormError get passwordError => _passwordError;
@@ -57,6 +60,16 @@ class MainViewModel extends ChangeNotifier {
       _usernameError = FormError.custom;
       _customError = "Error: $status";
     }
+
+    // saving the login try
+    final loginTry = LoginTry(
+        username: usernameController.text,
+        passwordLength: passwordController.text.length,
+        wasSuccessful: status == "success",
+        whenTried: DateTime.now().toString()
+    );
+    loginTryRepository.insert(loginTry);
+
     _isLoading = false;
     notifyListeners();
 

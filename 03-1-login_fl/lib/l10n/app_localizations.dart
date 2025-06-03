@@ -169,6 +169,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Loading...'**
   String get loading;
+
+  /// No description provided for @view_log_of_login_tries.
+  ///
+  /// In en, this message translates to:
+  /// **'View the log of login tries'**
+  String get view_log_of_login_tries;
+
+  /// No description provided for @login_tries_page.
+  ///
+  /// In en, this message translates to:
+  /// **'Login Tries Page'**
+  String get login_tries_page;
+
+  /// No description provided for @login_tries_so_far.
+  ///
+  /// In en, this message translates to:
+  /// **'Login tries so far:'**
+  String get login_tries_so_far;
 }
 
 class _AppLocalizationsDelegate

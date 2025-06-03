@@ -43,4 +43,13 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get loading => 'Carregando...';
+
+  @override
+  String get view_log_of_login_tries => 'Ver o registro de tentativas de login';
+
+  @override
+  String get login_tries_page => 'Página de tentativas de Login';
+
+  @override
+  String get login_tries_so_far => 'Tentativas até o momento:';
 }

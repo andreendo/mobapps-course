@@ -884,307 +884,289 @@ class _LoginPageState extends State<LoginPage> {
 
 ```
 
-### Salvar localmente todas as tentativas de login, com sucesso ou não (TODO)
+### Salvar localmente todas as tentativas de login, com sucesso ou não
 
-- No build.gradle.kts, adicionar as seguir mudanças para usar o Android Room:
 
-```kotlin
-plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("kotlin-kapt")  // esta linha
+- Executar os comandos a seguir:
+
+```bash
+dart pub add floor
+
+dart pub add floor_generator --dev
+
+dart pub add build_runner --dev
+
+```
+
+- Adicione classes associadas a biblioteca Floor:
+
+```dart
+// login_try.dart
+
+
+import 'package:floor/floor.dart';
+
+@entity
+class LoginTry {
+  @PrimaryKey(autoGenerate: true)
+  int? id;
+
+  final String username;
+
+  final int passwordLength;
+
+  final bool wasSuccessful;
+
+  final String whenTried;
+
+  LoginTry({this.id,
+    required this.username,
+    required this.passwordLength,
+    required this.wasSuccessful,
+    required this.whenTried});
+
+  @override
+  String toString() {
+    return 'LoginTry(id: $id, username: $username, passwordLength: $passwordLength, wasSuccessful: $wasSuccessful, whenTried: $whenTried)';
+  }
 }
 
-// ...
+// login_try_dao.dart
+import 'package:floor/floor.dart';
+import 'package:login_fl/repository/floor/login_try.dart';
 
-dependencies {
+@dao
+abstract class LoginTryDao {
 
-    // Room dependencies
-    // it needs kapt plugin -> id("kotlin-kapt")
-    val room_version = "2.6.1"
-    implementation("androidx.room:room-runtime:$room_version")
-    implementation("androidx.room:room-ktx:$room_version")
-    kapt("androidx.room:room-compiler:$room_version")
+  @Insert(onConflict: OnConflictStrategy.abort)
+  Future<void> insert(LoginTry loginTry);
 
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
-    testImplementation("androidx.room:room-testing:$room_version")
-    androidTestImplementation("app.cash.turbine:turbine:0.9.0")
+  @Query('SELECT * FROM LoginTry ORDER BY id DESC')
+  Future<List<LoginTry>> getAll();
 
+  @Query('SELECT * FROM LoginTry ORDER BY id DESC')
+  Stream<List<LoginTry>> getAllInStream();
+
+}
+
+// app_database.dart
+
+// imports needed for the floor classes
+import 'package:floor/floor.dart';
+import 'dart:async';
+import 'package:sqflite/sqflite.dart' as sqflite;
+
+import 'package:login_fl/repository/floor/login_try_dao.dart';
+import 'package:login_fl/repository/floor/login_try.dart';
+
+part 'app_database.g.dart';
+
+@Database(version: 1, entities: [LoginTry])
+abstract class AppDatabase extends FloorDatabase {
+
+  LoginTryDao get loginTryDao;
+
+}
+
+// login_try_repository.dart
+
+import 'package:login_fl/repository/floor/login_try.dart';
+import 'package:login_fl/repository/floor/login_try_dao.dart';
+
+class LoginTryRepository {
+
+  final LoginTryDao loginTryDao;
+
+  LoginTryRepository(this.loginTryDao);
+
+  Future<void> insert(LoginTry loginTry) => loginTryDao.insert(loginTry);
+
+  Future<List<LoginTry>> getAll() => loginTryDao.getAll();
+
+  Stream<List<LoginTry>> getAllInStream() => loginTryDao.getAllInStream();
 }
 
 ```
 
-- Adicione classes associadas ao Android Room:
+- Executar o comando `dart run build_runner build` para gerar o código que fazer a conexão com o SQLite. 
 
-```kotlin
-// LoginTry.kt
-package com.example.login_kt2.repository.room
+- Refatorar a main() para inicializar as classes de persistência. 
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+```dart
+import 'package:flutter/material.dart';
+import 'package:login_fl/repository/floor/app_database.dart';
+import 'package:login_fl/repository/login_try_repository.dart';
+import 'package:login_fl/ui/app.dart';
+import 'package:login_fl/viewmodels/main_view_model.dart';
+import 'package:login_fl/repository/user_repository.dart';
+import 'package:provider/provider.dart';
 
-@Entity
-data class LoginTry(
-    @PrimaryKey(autoGenerate = true)
-    val id : Int = 0,
-    val username : String,
-    val passwordLength : Int,
-    val wasSuccessful : Boolean,
-    val whenTried : String
-)
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-// LoginTryDao.kt
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
+  // init repositories
+  final database = await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+  final loginTryRepository = LoginTryRepository(database.loginTryDao);
+  final userRepository = UserRepository();
 
-@Dao
-interface LoginTryDao {
-
-    @Insert
-    suspend fun insert(loginTry : LoginTry)
-
-    @Query("Select * from LoginTry Order by id DESC")
-    suspend fun getAll() : List<LoginTry>
-
-    @Query("Select * from LoginTry Order by id DESC")
-    fun getAllInFlow() : Flow<List<LoginTry>>
-
-}
-
-// AppDatabase.kt
-import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-
-@Database(entities = [LoginTry::class], version = 1, exportSchema = false)
-abstract class AppDatabase : RoomDatabase() {
-
-    abstract fun loginTryDao(): LoginTryDao
-
-    companion object {
-
-        @Volatile
-        private var Instance: AppDatabase? = null
-
-        fun getDatabase(context: Context): AppDatabase {
-            return Instance ?: synchronized(this) {
-                Room.databaseBuilder(context, AppDatabase::class.java, "app_database")
-                    .build()
-                    .also { Instance = it }
-            }
-        }
-    }
-}
-
-
-// LoginTryRepository
-
-import com.example.login_kt2.repository.room.LoginTry
-import com.example.login_kt2.repository.room.LoginTryDao
-import kotlinx.coroutines.flow.Flow
-
-class LoginTryRepository(private val dao: LoginTryDao) {
-
-    suspend fun insert(loginTry: LoginTry) = dao.insert(loginTry)
-
-    fun getAll() : Flow<List<LoginTry>> = dao.getAllInFlow()
-
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => MainViewModel(userRepository, loginTryRepository)),
+        ChangeNotifierProvider(create: (_) => LoginTriesViewModel(loginTryRepository))
+      ],
+      child: const App(),
+    )
+  );
 }
 ```
 
-- Adicione as classes a seguir para facilitar a criação das viewModels e do repositories 
+- Adicionar testes para verificar se a persistência está funcionando adequadamente. 
 
-```kotlin
-// AppApplication.kt
+```dart
+import 'package:flutter_test/flutter_test.dart';
+import 'package:login_fl/repository/floor/app_database.dart';
+import 'package:login_fl/repository/floor/login_try.dart';
+import 'package:login_fl/repository/login_try_repository.dart';
 
-import android.app.Application
-import android.content.Context
-import android.util.Log
-import com.example.login_kt2.repository.LoginTryRepository
-import com.example.login_kt2.repository.room.AppDatabase
 
-/**
- * REQUIREMENT:
- * You need to specify attribute android:name=".AppApplication" in AndroidManifest.xml
- * Otherwise, this class is not initialized
- */
-class AppApplication : Application() {
+void main() {
+  late LoginTryRepository loginTryRepository;
 
-    // instance to obtain dependencies
-    lateinit var container: AppContainer
+  setUp(() async {
+    // this test needs to have SQLite installed in your system
+    // >> sudo apt install libsqlite3-dev
+    final database = await $FloorAppDatabase
+        .inMemoryDatabaseBuilder() // 💡 Use in-memory DB for tests
+        .build();
 
-    override fun onCreate() {
-        super.onCreate()
-        container = AppContainer(this)
-        Log.i("AppApplication", "onCreate")
-    }
+    loginTryRepository = LoginTryRepository(database.loginTryDao);
+  });
+
+  test('Insert one try', () async {
+    final loginTry = LoginTry(username: 'username',
+        passwordLength: 5,
+        wasSuccessful: false,
+        whenTried: 'some day');
+    await loginTryRepository.insert(loginTry);
+    final list = await loginTryRepository.getAll();
+    expect(list.length, equals(1));
+    expect(list[0].username, equals(loginTry.username));
+  });
 }
-
-/**
- * We want to limit the visibility of Android-related objects to ViewModels and Composable.
- *
- * So, we attach here the repositories to a GameApplication object
- *    so that we can retrieve them in the AppViewModelProvider.
- */
-class AppContainer(private val context: Context) {
-    val loginTryRepository : LoginTryRepository by lazy {
-        LoginTryRepository(AppDatabase.getDatabase(context).loginTryDao())
-    }
-}
-
-
-// AppViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
-import androidx.lifecycle.viewmodel.CreationExtras
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
-
-
-/**
- * Provides Factory to create instance of ViewModel for the entire app
- */
-object AppViewModelProvider {
-    val Factory = viewModelFactory {
-
-        // Initializer for MainViewModel
-        initializer {
-            MainViewModel(appApplication().container.loginTryRepository)
-        }
-
-        // Initializer for LogTriesViewModel
-        initializer {
-            LogTriesViewModel(appApplication().container.loginTryRepository)
-        }
-
-    }
-}
-
-fun CreationExtras.appApplication(): AppApplication =
-    (this[AndroidViewModelFactory.APPLICATION_KEY] as AppApplication)
-
 ```
 
 - Refatore a mainViewModel para gravar tentativas de login. Adicione uma nova screen e viewModel para mostrar o log de tentativas.
 
-```kotlin
-// LogTriesViewModel.kt
-import androidx.compose.runtime.mutableStateListOf
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.login_kt2.repository.LoginTryRepository
-import com.example.login_kt2.repository.room.LoginTry
-import kotlinx.coroutines.launch
+```dart
+// main_view_model.dart
+    // ...
+    if (status == "wrong_username") {
+      _usernameError = FormError.wrongUsername;
+    } else if (status == "wrong_password") {
+      _passwordError = FormError.wrongPassword;
+    } else {
+      _usernameError = FormError.custom;
+      _customError = "Error: $status";
+    }
 
-class LogTriesViewModel(val loginTryRepository: LoginTryRepository) : ViewModel() {
+    // saving the login try
+    final loginTry = LoginTry(
+        username: usernameController.text,
+        passwordLength: passwordController.text.length,
+        wasSuccessful: status == "success",
+        whenTried: DateTime.now().toString()
+    );
+    loginTryRepository.insert(loginTry);
 
-    var loginTries = mutableStateListOf<LoginTry>()
+    // ...
 
-    init {
-        viewModelScope.launch {
-            loginTryRepository.getAll().collect {
-                loginTries.clear()
-                it.forEach { v -> loginTries.add(v) }
-            }
+// login_tries_view_model.dart´
+import 'package:flutter/material.dart';
+import 'package:login_fl/repository/floor/login_try.dart';
+import 'package:login_fl/repository/login_try_repository.dart';
+
+class LoginTriesViewModel extends ChangeNotifier {
+
+  final LoginTryRepository loginTryRepository;
+
+  List<LoginTry> _loginTries = [];
+
+  get loginTries => _loginTries;
+
+  LoginTriesViewModel(this.loginTryRepository) {
+    initialize();
+  }
+
+  void initialize() async {
+    loginTryRepository.getAllInStream().listen((List<LoginTry> tries) {
+      _loginTries = tries;
+      notifyListeners();
+    });
+  }
+}
+
+// login_tries_page.dart
+
+import 'package:flutter/material.dart';
+import 'package:login_fl/l10n/app_localizations.dart';
+import 'package:login_fl/viewmodels/login_tries_view_model.dart';
+import 'package:provider/provider.dart';
+
+class LoginTriesPage extends StatelessWidget {
+  const LoginTriesPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(AppLocalizations.of(context)!.login_tries_page),
+      ),
+      body: Consumer<LoginTriesViewModel>(
+        builder: (context, viewmodel, child) {
+          return Center(
+            child: Column(
+                children: [
+                  SizedBox(height: 10,),
+                  Text(
+                      style: Theme.of(context).textTheme.headlineSmall,
+                      '${AppLocalizations.of(context)!.login_tries_so_far} ${viewmodel.loginTries.length}'
+                  ),
+                  SizedBox(height: 10,),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: viewmodel.loginTries.length,
+                      itemBuilder: (context, index) {
+                        return TryCard(text: viewmodel.loginTries[index].toString());
+                      }
+                    )
+                  ),
+                ]
+            ),
+          );
         }
-    }
-
+      )
+    );
+  }
 }
 
-// LogTriesScreen.kt
-package com.example.login_kt2
+class TryCard extends StatelessWidget {
+  final String text;
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+  const TryCard({super.key, required this.text});
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun LogTriesScreen(
-    navigateUp : () -> Unit = {},
-    viewModel: LogTriesViewModel = viewModel(factory = AppViewModelProvider.Factory),
-) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Log Tries Screen") },
-                colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                ),
-                navigationIcon = {
-                    IconButton(onClick = navigateUp) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "back button"
-                        )
-                    }
-                }
-            )
-        },
-        modifier = Modifier.fillMaxSize()
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .padding(innerPadding) // Apply the innerPadding to the Column (avoid topbar on top of items)
-                .padding(10.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text("Login tries so far: ${viewModel.loginTries.size}")
-            LazyColumn {
-                itemsIndexed(viewModel.loginTries) { index, item ->
-                    LoginTryCard(item.toString())
-                }
-            }
-        }
-    }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black38),
+      ),
+      child: ListTile(
+        title: Text(text),
+      ),
+    );
+  }
 }
 
-// LoginTryCard.kt
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-
-@Composable
-fun LoginTryCard(item: String) {
-    Card(
-        modifier = Modifier
-            .padding(4.dp)
-            .fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
-    ) {
-        Text(
-            text = item,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.padding(16.dp) // Add padding inside the card
-        )
-    }
-}
 ```
