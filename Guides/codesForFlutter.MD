@@ -353,6 +353,34 @@ class _LoginPageState extends State<LoginPage> {
 }
 ```
 
+- Componente que representa o carregamento.
+
+```dart
+// loading_dialog.dart
+
+class LoadingDialog extends StatelessWidget {
+  const LoadingDialog({super.key});
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(width: 20),
+            Text('carregando'),
+          ],
+        ),
+      ),
+    );
+  }
+
+}
+```
 
 
 

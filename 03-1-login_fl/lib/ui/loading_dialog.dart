@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:login_fl/l10n/app_localizations.dart';
 
 class LoadingDialog extends StatelessWidget {
+  const LoadingDialog({super.key});
+
 
   @override
   Widget build(BuildContext context) {
