@@ -2,6 +2,7 @@ import 'package:boardofmessages_fl/repository/board.dart';
 import 'package:boardofmessages_fl/repository/general_response.dart';
 import 'package:boardofmessages_fl/repository/message.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class BoardRepository {
   static const BASE_URL = "http://10.0.2.2:3000";
@@ -15,7 +16,12 @@ class BoardRepository {
     if (test) {
       _dio = Dio(BaseOptions(baseUrl: TO_TEST_URL));
     } else {
-      _dio = Dio(BaseOptions(baseUrl: BASE_URL));
+      if (kIsWeb) {
+        // the platform is web, use the same test url
+        _dio = Dio(BaseOptions(baseUrl: TO_TEST_URL));
+      } else {
+        _dio = Dio(BaseOptions(baseUrl: BASE_URL));
+      }
     }
   }
 
