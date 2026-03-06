@@ -1,3 +1,5 @@
+### In VSCode, install plugin "REST Client" to run
+
 GET http://localhost:3000/board
 
 ###
