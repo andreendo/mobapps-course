@@ -1,6 +1,6 @@
 # Refatorar o app PesquisaDeInteresseApp para usar ViewModel
 
-- Copiar o projeto https://github.com/andreendo/mobapps-course/tree/master/03-3-PesquisaDeInteresseApp.
+- Copiar o projeto https://github.com/andreendo/mobapps-course/tree/master/view_based_projects/03-3-PesquisaDeInteresseApp.
 
 - Abrir o projeto no Android Studio
 
