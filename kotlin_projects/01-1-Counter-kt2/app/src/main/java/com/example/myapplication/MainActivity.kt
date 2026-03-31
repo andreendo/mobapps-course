@@ -15,7 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+// import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -51,10 +51,10 @@ fun Greeting(modifier: Modifier = Modifier) {
 
     // create variables that are remembered after recompositions
     // create state holders
-    var counter by remember {
+    var counter by rememberSaveable {
         mutableStateOf(0)
     }
-    var messageLabel by remember {
+    var messageLabel by rememberSaveable {
         mutableStateOf("")
     }
 

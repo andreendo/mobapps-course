@@ -85,7 +85,7 @@ fun Form1Layout() {
                 firstName = ""
                 status = ""
             }) {
-                Text("CANCEL")
+                Text(stringResource(R.string.cancel))
             }
             Button(onClick = {
                 /* Handle Proceed */
@@ -97,7 +97,7 @@ fun Form1Layout() {
 
                 status = context.getString(R.string.form_data_saved_msg)
             }) {
-                Text("PROCEED")
+                Text(stringResource(R.string.proceed))
             }
         }
         Text(
