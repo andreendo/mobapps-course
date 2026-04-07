@@ -343,7 +343,7 @@ lifecycle = "2.6.2" # Or latest
 [libraries]
 androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 
-# build.gradle.kts
+# build.gradle.kts (dentro de dependencies)
 
 implementation(libs.androidx.lifecycle.viewmodel.compose)
 ```
@@ -1022,13 +1022,25 @@ class UserRepositoryTest {
 
 ### Salvar localmente todas as tentativas de login, com sucesso ou não
 
+- No build.gradle.kts (Project), adicionar:
+
+```kotlin
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.compose) apply false
+    alias(libs.plugins.jetbrains.kotlin.jvm) apply false
+    id("com.google.devtools.ksp") version "2.3.4" apply false   // esta linha
+}
+```
+
 - No build.gradle.kts, adicionar as seguir mudanças para usar o Android Room:
 
 ```kotlin
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("kotlin-kapt")  // esta linha
+    id("com.google.devtools.ksp")   // esta linha
 }
 
 // ...
@@ -1036,11 +1048,11 @@ plugins {
 dependencies {
 
     // Room dependencies
-    // it needs kapt plugin -> id("kotlin-kapt")
-    val room_version = "2.6.1"
+    // it needs ksp plugin
+    val room_version = "2.8.4"
     implementation("androidx.room:room-runtime:$room_version")
-    implementation("androidx.room:room-ktx:$room_version")
-    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:${room_version}")
+    ksp("androidx.room:room-compiler:$room_version")
 
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
     testImplementation("androidx.room:room-testing:$room_version")
@@ -1162,7 +1174,7 @@ class AppApplication : Application() {
 /**
  * We want to limit the visibility of Android-related objects to ViewModels and Composable.
  *
- * So, we attach here the repositories to a GameApplication object
+ * So, we attach here the repositories to an object
  *    so that we can retrieve them in the AppViewModelProvider.
  */
 class AppContainer(private val context: Context) {
@@ -1181,6 +1193,8 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 
 /**
  * Provides Factory to create instance of ViewModel for the entire app
+ *
+ * Remember to use this factory when creating/retrieving the ViewModels in the composables
  */
 object AppViewModelProvider {
     val Factory = viewModelFactory {
