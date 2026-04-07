@@ -18,8 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.toastdialogapp_kt2.ui.theme.ToastDialogApp_kt2Theme
 
 @Composable
-fun MinimalDialog(text: String, onDismissRequest: () -> Unit) {
-    Dialog(onDismissRequest = { onDismissRequest() }) {
+fun MinimalDialog(text: String, onDismissRequest: () -> Unit = {}) {
+    Dialog(onDismissRequest = onDismissRequest) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -42,6 +42,6 @@ fun MinimalDialog(text: String, onDismissRequest: () -> Unit) {
 @Composable
 fun MinimalDialogPreview() {
     ToastDialogApp_kt2Theme {
-        MinimalDialog(text = "Test") { }
+        MinimalDialog(text = "Test")
     }
 }

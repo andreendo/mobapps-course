@@ -29,13 +29,21 @@ fun MainScreen() {
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Button(onClick = {
-            val toast = Toast.makeText(context, R.string.short_toast_msg, Toast.LENGTH_SHORT)
+            val toast = Toast.makeText(
+                context,
+                R.string.short_toast_msg,
+                Toast.LENGTH_SHORT
+            )
             toast.show()
         }) {
             Text(text = stringResource(id = R.string.show_toast1))
         }
         Button(onClick = {
-            val toast = Toast.makeText(context, R.string.long_toast_msg, Toast.LENGTH_LONG)
+            val toast = Toast.makeText(
+                context,
+                R.string.long_toast_msg,
+                Toast.LENGTH_LONG
+            )
             // This method is not working for devices running API30 or higher
             // Source: https://stackoverflow.com/questions/65004242/toast-setgravity-does-not-work-in-my-avd-nexus-6-api-30
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
@@ -58,9 +66,12 @@ fun MainScreen() {
     // Pattern matching to decide about the dialogs
     when {
         openMinimalDialog -> {
-            MinimalDialog(stringResource(id = R.string.show_empty_dialog), onDismissRequest = {
+            MinimalDialog(
+                stringResource(id = R.string.show_empty_dialog),
+                onDismissRequest = {
                 openMinimalDialog = false
-            })
+                }
+            )
         }
 
         openNormalDialog -> {
