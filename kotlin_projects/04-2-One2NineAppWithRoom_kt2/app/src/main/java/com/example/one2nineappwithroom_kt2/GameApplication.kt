@@ -24,7 +24,8 @@ class GameApplication : Application() {
 }
 
 /**
- * We want to limit the visibility of Android-related objects to ViewModels and Composable.
+ * We want to limit the visibility of Android-related objects to ViewModels and
+ * Composable.
  *
  * So, we attach here the repositories to a GameApplication object
  *    so that we can retrieve them in the AppViewModelProvider.

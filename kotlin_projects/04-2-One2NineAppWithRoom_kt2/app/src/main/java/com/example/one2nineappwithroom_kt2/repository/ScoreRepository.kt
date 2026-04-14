@@ -9,5 +9,5 @@ class ScoreRepository(private val scoreDao: ScoreDao) {
 
     fun getAllScores(): Flow<List<Score>> = scoreDao.getAllScores()
 
-    suspend fun getBestScore(): Score = scoreDao.getBestScore()
+    suspend fun getBestScore(): Score? = scoreDao.getBestScore()
 }

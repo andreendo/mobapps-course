@@ -11,7 +11,7 @@ interface ScoreDao {
     suspend fun insert(score: Score)
 
     @Query("SELECT * FROM Score ORDER BY time ASC LIMIT 1")
-    suspend fun getBestScore(): Score
+    suspend fun getBestScore(): Score?
 
     @Query("SELECT * FROM Score ORDER BY time ASC")
     fun getAllScores(): Flow<List<Score>>

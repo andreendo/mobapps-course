@@ -3,4 +3,5 @@ plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.kotlin.compose) apply false
+    id("com.google.devtools.ksp") version "2.3.4" apply false   // esta linha
 }

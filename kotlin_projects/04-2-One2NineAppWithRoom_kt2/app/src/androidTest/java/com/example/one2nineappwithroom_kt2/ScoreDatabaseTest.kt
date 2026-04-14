@@ -82,7 +82,7 @@ class ScoreDatabaseTest {
         scoreDao.insert(SCORE1)
         scoreDao.insert(SCORE2)
         val bestScore = scoreDao.getBestScore()
-        Assert.assertEquals("player 2", bestScore.playerName)
+        Assert.assertEquals("player 2", bestScore?.playerName)
     }
 
     @Test
