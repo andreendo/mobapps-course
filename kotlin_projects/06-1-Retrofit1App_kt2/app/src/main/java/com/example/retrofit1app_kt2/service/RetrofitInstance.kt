@@ -5,7 +5,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
     private
+    //
     const val BASE_URL = "https://andreendo.github.io/api/"
+
+
 //    this API is currently offline; I add a static example
 //    const val BASE_URL = "https://animechan.xyz/api/"
 

@@ -12,10 +12,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -24,10 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.example.retrofit1app_kt2.ui.theme.Retrofit1App_kt2Theme
 
 @Composable
-fun App() {
-    val viewModel = viewModel<MainViewModel>()
-    var city by remember { mutableStateOf("") }
-
+fun App(viewModel: MainViewModel = viewModel<MainViewModel>()) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -35,13 +28,13 @@ fun App() {
             .padding(8.dp)
     ) {
         OutlinedTextField(
-            value = city,
-            onValueChange = { city = it },
+            value = viewModel.city,
+            onValueChange = { viewModel.city = it },
             modifier = Modifier.fillMaxWidth(),
             label = { Text(text = "City Name") }
         )
         Spacer(Modifier.height(10.dp))
-        Button(onClick = { viewModel.getWeather(city) }) {
+        Button(onClick = viewModel::getWeather) {
             Text(text = "Retrieve Weather")
         }
         if (viewModel.loading)

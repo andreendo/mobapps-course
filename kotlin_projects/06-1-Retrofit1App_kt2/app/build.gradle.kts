@@ -64,6 +64,9 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
+    // fix "Trust anchor not found" error for older Android versions
+    implementation("org.conscrypt:conscrypt-android:2.5.2")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
