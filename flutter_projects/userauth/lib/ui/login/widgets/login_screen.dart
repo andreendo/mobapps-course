@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:userauth/ui/items/view_models/main_view_model.dart';
 import 'package:userauth/ui/items/widgets/main_screen.dart';
 import 'package:userauth/ui/login/view_models/login_view_model.dart';
 
@@ -22,6 +23,10 @@ class _LoginScreenState extends State<LoginScreen> {
     viewModel.addListener(() {
       if (viewModel.isLoggedIn) {
         print('Navigate to main page');
+
+        final mainViewModel = context.read<MainViewModel>();
+        mainViewModel.loadInitialData();
+
         Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => MainScreen())
         );
@@ -73,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 40,),
               FilledButton(
-                onPressed: () { viewModel.clickLogin(); },
+                onPressed: () => viewModel.clickLogin(),
                 child: Text('Login')
               ),
               SizedBox(height: 40,),
