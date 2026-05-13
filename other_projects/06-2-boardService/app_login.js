@@ -42,7 +42,7 @@ app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     console.log("POST login: " + JSON.stringify(req.body));
 
-    await delay(2000);
+    await delay(5000);
 
     if (!username || !password) {
         return res.json({ message: 'Username and password are required.' });
